@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>サンプルページ</title>
+    </head>
+    <body>
+        <h2>入力エリア</h2>
+        <section>
+            <form action="#" id="addForm">
+                <input type="text" name="addArea" id="text">
+                <input type="button" value="入力" style="background-color:cornflowerblue" onclick=AddElement()>
+            </form>
+        </section>
+        <h2>削除エリア</h2>
+        <section>
+            <form action="#" id="delForm">
+                <input type="text" name="delArea">
+                <input type="button" value="削除" style="background-color:blanchedalmond" onclick=DelElement()>
+            </form>
+        </section>
+        <h2>表示エリア</h2>
+        <hr>
+        <div id="output1"></div>
+        <div id="output2"></div>
+        
+        <script>
+        
+            //var addText=document.getElementById('addForm').addArea;
+            var addText=document.getElementById('text');
+            var output=document.getElementById('output1');
+            console.log(addText);
+        
+        
+            addText.addEventListener('keyup',function(){
+                var textP=addText.value;
+                document.getElementById('output1').textContent=textP;
+            },false)
+        
+        
+            function AddElement(){
+                
+                var newDiv = document.createElement("div");
+                //var newContent=document.createTextNode(addText.value);
+                //newDiv.appendChild(newContent);
+                newDiv.textContent=addText.value;
+                var parentElement=document.getElementById("output2");
+                var theFirstChild=parentElement.firstChild;
+                parentElement.insertBefore(newDiv,theFirstChild);
+                
+                document.getElementById('addForm').addArea.value="";
+                document.getElementById('output1').textContent="";
+                
+            }
+        
+        
+            var delText=document.getElementById("delForm").delArea;
+        
+            var DelElement = function(){
+               
+                var delDiv=document.getElementById("output2");
+                var remChild=[];
+               
+                if(delDiv.hasChildNodes()){
+                    var children=delDiv.childNodes;
+                    for(var i=0;i<children.length;i++){
+                        if(children[i].textContent === delText.value){
+                            remChild.push(children[i]);
+                        //    delDiv.removeChild(delDiv.children[i]);
+                        }
+                        console.log(remChild);
+                    }
+                       
+                       for(var h=0;h<remChild.length;h++){
+                            delDiv.removeChild(remChild[h]);
+                        }
+                   
+                    
+                }
+                document.getElementById('delForm').delArea.value="";
+             
+            }
+               
+    
+    
+        </script>
+    </body>
+</html>
